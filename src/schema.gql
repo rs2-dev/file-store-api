@@ -1,0 +1,13 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type FileStoreEntity {
+  name: String!
+  build: Int!
+}
+
+type Query {
+  status: String!
+  getFileStore: FileStoreEntity!
+}
