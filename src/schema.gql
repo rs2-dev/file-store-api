@@ -4,10 +4,46 @@
 
 type FileStoreEntity {
   name: String!
-  build: Int!
+  build: String!
+  source: FileStoreSource!
+}
+
+enum FileStoreSource {
+  OPENRS2
+  UPLOAD
+}
+
+type OpenRS2BuildNumber {
+  major: Int
+  minor: Int
+}
+
+type OpenRS2FileStore {
+  id: Int!
+  scope: String
+  game: String
+  environment: String
+  language: String
+  builds: [OpenRS2BuildNumber!]
+  timestamp: String
+  sources: [String!]
+  valid_indexes: Int
+  indexes: Int
+  valid_groups: Int
+  groups: Int
+  valid_keys: Int
+  keys: Int
+  size: Int
+  blocks: Int
+  disk_store_valid: Boolean
 }
 
 type Query {
   status: String!
   getFileStore: FileStoreEntity!
+  searchOpenRS2FileStores(build: String!): [OpenRS2FileStore!]!
+}
+
+type Mutation {
+  uploadOpenRS2FileStore(name: String!, openRS2Id: Int!): FileStoreEntity!
 }

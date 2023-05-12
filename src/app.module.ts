@@ -8,6 +8,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AppResolver } from './app.resolver';
 import { FileStoreModule } from './file-store/file-store.module';
+import { OpenRS2Module } from './openrs2/openrs2.module';
+import { FileStoreEntity } from './file-store/file-store.entity';
 
 @Module({
     imports: [
@@ -21,7 +23,7 @@ import { FileStoreModule } from './file-store/file-store.module';
                 username: configService.get('DB_USERNAME'),
                 password: configService.get('DB_PASSWORD'),
                 database: configService.get('DB_NAME'),
-                entities: [],
+                entities: [FileStoreEntity],
                 synchronize: true,
             }),
             inject: [ConfigService],
@@ -31,6 +33,7 @@ import { FileStoreModule } from './file-store/file-store.module';
             autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
         }),
         FileStoreModule,
+        OpenRS2Module,
     ],
     controllers: [AppController],
     providers: [
